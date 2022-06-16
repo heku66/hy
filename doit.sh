@@ -14,8 +14,8 @@ openssl req -new -x509 -days 36500 -key ca.key -out /etc/hysteria/hysteria/ca.cr
 cat <<EOF > /etc/hysteria/config.json
 {
   "listen": ":6888",
-  "cert": "/etc/hysteria/$domain.crt",
-  "key": "/etc/hysteria/$domain.key",
+  "cert": "/etc/hysteria/ca.crt",
+  "key": "/etc/hysteria/ca.key",
   "obfs": "g6813"
 }
 EOF
