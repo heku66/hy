@@ -53,10 +53,10 @@ ExecStart=/etc/hysteria/hysteria --log-level warn -c /etc/hysteria/config.json s
 WantedBy=multi-user.target
 EOF
 chmod 644 /etc/systemd/system/hysteria.service
+echo -e "\033[1;;35m\n正在启动服务...\n\033[0m"
 systemctl daemon-reload
 systemctl enable hysteria
 systemctl start hysteria
-echo -e "\033[1;;35m\nwait...\n\033[0m"
 sleep 3
 status=`systemctl is-active hysteria`
 if [ "${status}" = "active" ];then
@@ -65,6 +65,6 @@ echo  "0 4 * * * systemctl restart hysteria" >> ./crontab.tmp
 crontab ./crontab.tmp
 rm -rf ./crontab.tmp
 
-echo -e "\033[35m↓***********************************↓↓↓copy↓↓↓*******************************↓\033[0m"
+echo -e "\033[35m↓***********************************↓↓↓以下为客户端配置文件↓↓↓*******************************↓\033[0m"
 cat ./config.json
-echo -e "\033[35m↑***********************************↑↑↑copy↑↑↑*******************************↑\033[0m"
+echo -e "\033[35m↑*************************************↑↑↑可复制使用↑↑↑*********************************↑\033[0m"
