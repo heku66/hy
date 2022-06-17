@@ -11,20 +11,27 @@ cd /etc/hysteria
 ip=`curl -4 -s ip.sb`
 openssl ecparam -genkey -name prime256v1 -out ca.key
 openssl req -new -x509 -days 36500 -key ca.key -out ca.crt  -subj "/CN=bing.com"
-
+read -r -p "请设置UDP端口[6888]:" redPort
+if [[ -z "${redPort}"]];then
+  redPort=6888
+fi
+read -r -p "请设置连接密码[g6813]:" redPass
+if [[ -z "${redPass}"]];then
+  redPass=g6813
+fi
 cat <<EOF > ./config.json
 {
-  "listen": ":6888",
+  "listen": ":${redPort}",
   "cert": "/etc/hysteria/ca.crt",
   "key": "/etc/hysteria/ca.key",
-  "obfs": "g6813"
+  "obfs": "${redPass}"
 }
 EOF
 cd /root
 cat <<EOF > config.json
 {
-  "server": "$ip:6888",
-  "obfs": "g6813",
+  "server": "$ip:${redPort}",
+  "obfs": "${redPass}",
   "up_mbps": 20,
   "down_mbps": 100,
   "insecure": true,
@@ -64,11 +71,12 @@ if [ "${status}" = "active" ];then
   echo  "0 4 * * * systemctl restart hysteria" >> ./crontab.tmp
   crontab ./crontab.tmp
   rm -rf ./crontab.tmp
-  echo -e "\033[1;;35m\n服务已正常启动...\n\033[0m"
+  echo -e "\033[1;;35m\n服务已正常启动...[hysteria]\n\033[0m"
 else
-  echo -e "\033[1;;35m\n服务启动异常，请检查相关日志...\n\033[0m"
+  echo -e "\033[1;;31m\n服务启动异常，请检查相关日志...\n\033[0m"
   exit 1
 fi
 echo -e "\033[35m↓***********************************↓↓↓以下为客户端配置文件↓↓↓*******************************↓\033[0m"
 cat ./config.json
 echo -e "\033[35m↑*************************************↑↑↑可复制使用↑↑↑*********************************↑\033[0m"
+echo -e "\033[1;;31m\n客户端配置相关参考：https://github.com/emptysuns/Hi_Hysteria/blob/main/md/v2n.md\n\033[0m"
