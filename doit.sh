@@ -17,7 +17,7 @@ if [[ -z "${redPort}"]];then
 fi
 read -r -p "请设置连接密码[g6813]:" redPass
 if [[ -z "${redPass}"]];then
-  redPass=g6813
+  redPass="g6813"
 fi
 cat <<EOF > ./config.json
 {
