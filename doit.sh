@@ -60,11 +60,13 @@ systemctl start hysteria
 sleep 3
 status=`systemctl is-active hysteria`
 if [ "${status}" = "active" ];then
-crontab -l > ./crontab.tmp
-echo  "0 4 * * * systemctl restart hysteria" >> ./crontab.tmp
-crontab ./crontab.tmp
-rm -rf ./crontab.tmp
-echo -e "\033[1;;35m\n服务已正常启动...\n\033[0m"
+  crontab -l > ./crontab.tmp
+  echo  "0 4 * * * systemctl restart hysteria" >> ./crontab.tmp
+  crontab ./crontab.tmp
+  rm -rf ./crontab.tmp
+  echo -e "\033[1;;35m\n服务已正常启动...\n\033[0m"
+else
+  echo -e "\033[1;;35m\n服务启动异常，请检查相关日志...\n\033[0m"
 fi
 echo -e "\033[35m↓***********************************↓↓↓以下为客户端配置文件↓↓↓*******************************↓\033[0m"
 cat ./config.json
