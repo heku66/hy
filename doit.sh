@@ -11,11 +11,15 @@ cd /etc/hysteria
 ip=`curl -4 -s ip.sb`
 openssl ecparam -genkey -name prime256v1 -out ca.key
 openssl req -new -x509 -days 36500 -key ca.key -out ca.crt  -subj "/CN=bing.com"
-read -p "请设置UDP端口[6888]:" redPort
+echo
+echo -e "\033[1;;31m\n警告：使用跳跳工具会有封号的风险！请慎用！\n\033[0m"
+echo
+read -p "自定义UDP端口[6888]:" redPort
 if [ -z $redPort ]; then
   redPort=6888
 fi
-read -p "请设置连接密码[g6813]:" redPass
+echo
+read -p "自定义连接密钥[g6813]:" redPass
 if [ -z $redPass ]; then
   redPass="g6813"
 fi
