@@ -2,7 +2,7 @@
 
 #一键安装
 
-su - root #Change to root
+sudo -i #Change to root
 
 bash <(curl -fsSL https://raw.githubusercontent.com/heku66/hys390x/main/doit.sh)
 
