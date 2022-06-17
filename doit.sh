@@ -25,16 +25,16 @@ opsys() {
         MACHINE='mipsle'
         ;;
       *)
-        echo "error: The architecture is not supported."
+        echo "错误：此架构不支持！"
         exit 1
         ;;
     esac
     if [[ ! -f '/etc/os-release' ]]; then
-      echo "error: Don't use outdated Linux distributions."
+      echo "错误：系统版本太旧！"
       exit 1
     fi
   else
-    echo "error: This operating system is not supported."
+    echo "错误：此操作平台不支持！"
     exit 1
   fi
 }
