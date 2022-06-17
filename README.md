@@ -1,6 +1,6 @@
 # hysteria for s390x
 
-#安装
+#一键安装
 
 su - root #Change to root
 
