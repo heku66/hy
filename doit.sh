@@ -19,7 +19,7 @@ if [ -z $redPort ]; then
   redPort=6888
 fi
 echo
-read -p "自定义连接密钥[g6813]:" redPass
+read -p "自定义混淆密码[g6813]:" redPass
 if [ -z $redPass ]; then
   redPass="g6813"
 fi
