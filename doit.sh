@@ -2,7 +2,7 @@
 export LANG=en_US.UTF-8
 
 mkdir -p /etc/hysteria
-
+echo -e "\033[1;;35m\n正在查找下载匹配的安装包...\n\033[0m"
 opsys() {
   if [[ "$(uname)" == 'Linux' ]]; then
     case "$(uname -m)" in
