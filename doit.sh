@@ -12,26 +12,26 @@ ip=`curl -4 -s ip.sb`
 openssl ecparam -genkey -name prime256v1 -out ca.key
 openssl req -new -x509 -days 36500 -key ca.key -out ca.crt  -subj "/CN=bing.com"
 read -p "请设置UDP端口[6888]:" redPort
-if [[ -z "${redPort}"]]; then
+if [ -z $redPort ]; then
   redPort=6888
 fi
 read -p "请设置连接密码[g6813]:" redPass
-if [[ -z "${redPass}"]]; then
+if [ -z $redPass ]; then
   redPass="g6813"
 fi
 cat <<EOF > ./config.json
 {
-  "listen": ":${redPort}",
+  "listen": ":$redPort",
   "cert": "/etc/hysteria/ca.crt",
   "key": "/etc/hysteria/ca.key",
-  "obfs": "${redPass}"
+  "obfs": "$redPass"
 }
 EOF
 cd /root
 cat <<EOF > config.json
 {
-  "server": "$ip:${redPort}",
-  "obfs": "${redPass}",
+  "server": "$ip:$redPort",
+  "obfs": "$redPass",
   "up_mbps": 20,
   "down_mbps": 100,
   "insecure": true,
