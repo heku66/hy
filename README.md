@@ -1,4 +1,4 @@
-# hysteria for s390x
+# hysteria
 
 #一键安装
 
