@@ -80,10 +80,10 @@ cat <<EOF > config.json
   "down_mbps": 100,
   "insecure": true,
   "socks5": {
-    "listen": "127.0.0.1:1080"
+    "listen": "127.0.0.1:10808"
   },
   "http": {
-    "listen": "127.0.0.1:1081"
+    "listen": "127.0.0.1:10809"
   }
 }
 EOF
