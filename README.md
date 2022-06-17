@@ -1,4 +1,4 @@
-# hy for s390x
+# hyteria for s390x
 
 #安装
 
