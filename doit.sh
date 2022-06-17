@@ -2,9 +2,46 @@
 export LANG=en_US.UTF-8
 
 mkdir -p /etc/hysteria
+
+opsys() {
+  if [[ "$(uname)" == 'Linux' ]]; then
+    case "$(uname -m)" in
+      'i386' | 'i686')
+        MACHINE='386'
+        ;;
+      'amd64' | 'x86_64')
+        MACHINE='amd64'
+        ;;
+      's390x')
+        MACHINE='s390x'
+        ;;
+      'armv5tel' | 'armv6l' | 'armv7' | 'armv7l')
+        MACHINE='arm'
+        ;;
+      'armv8' | 'aarch64')
+        MACHINE='arm64'
+        ;;
+      'mips' | 'mipsle' | 'mips64' | 'mips64le')
+        MACHINE='mipsle'
+        ;;
+      *)
+        echo "error: The architecture is not supported."
+        exit 1
+        ;;
+    esac
+    if [[ ! -f '/etc/os-release' ]]; then
+      echo "error: Don't use outdated Linux distributions."
+      exit 1
+    fi
+  else
+    echo "error: This operating system is not supported."
+    exit 1
+  fi
+}
+opsys
 version=`wget -qO- -t1 -T2 --no-check-certificate "https://api.github.com/repos/HyNetwork/hysteria/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'`
 
-wget -q -O /etc/hysteria/hysteria --no-check-certificate https://github.com/HyNetwork/hysteria/releases/download/$version/hysteria-linux-s390x
+wget -q -O /etc/hysteria/hysteria --no-check-certificate https://github.com/HyNetwork/hysteria/releases/download/$version/hysteria-linux-$MACHINE
 
 chmod 755 /etc/hysteria/hysteria
 cd /etc/hysteria
