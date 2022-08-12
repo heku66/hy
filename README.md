@@ -1,8 +1,6 @@
 # hysteria
 
-#一键安装
-
-#一键脚本（优先）
+#一键安装1
 
 bash <(curl -fsSL https://git.io/hysteria.sh)
 
